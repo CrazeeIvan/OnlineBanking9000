@@ -1147,342 +1147,374 @@ Namespace dbTransactionsDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(1) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT TransactionID, PayeeName, SepaDate, Amount, BIC, IBAN, IsPayment, FromAcco"& _ 
+            Me._commandCollection(0).CommandText = "SELECT TransactionID, PayeeName, SepaDate, Amount, BIC, IBAN, IsPayment, FromAcco" & _
                 "unt, ToAccount, Reference FROM dbo.tblSepa"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "INSERT INTO tblSepa" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (PayeeName, SepaDate, Amount, BIC, " & _
+                "IBAN, IsPayment, FromAccount, ToAccount, Reference)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "VALUES        ((PayeeName =" & _
+                " @Param1), (SepaDate = @Param2), (Amount = @Param3),(BIC = @Param4),(IBAN = @Par" & _
+                "am5),(IsPayment = @Param6),(FromAccount = @Param7),(ToAccount = @Param8),(Refere" & _
+                "nce = @Param9))" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & ";   " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT TransactionID, PayeeName, SepaDate, Amount, BIC, I" & _
+                "BAN, IsPayment, FromAccount, ToAccount, Reference FROM tblSepa WHERE (Transactio" & _
+                "nID = SCOPE_IDENTITY())"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As dbTransactionsDataSet.tblSepaDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, True)> _
+        Public Overridable Overloads Function Fill(ByVal dataTable As dbTransactionsDataSet.tblSepaDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As dbTransactionsDataSet.tblSepaDataTable
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], True)> _
+        Public Overridable Overloads Function GetData() As dbTransactionsDataSet.tblSepaDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As dbTransactionsDataSet.tblSepaDataTable = New dbTransactionsDataSet.tblSepaDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataTable As dbTransactionsDataSet.tblSepaDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataTable As dbTransactionsDataSet.tblSepaDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataSet As dbTransactionsDataSet) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataSet As dbTransactionsDataSet) As Integer
             Return Me.Adapter.Update(dataSet, "tblSepa")
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(dataRows)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_TransactionID As Integer, ByVal Original_PayeeName As String, ByVal Original_SepaDate As Date, ByVal Original_Amount As Decimal, ByVal Original_BIC As String, ByVal Original_IBAN As String, ByVal Original_IsPayment As Global.System.Nullable(Of Boolean), ByVal Original_FromAccount As String, ByVal Original_ToAccount As String, ByVal Original_Reference As String) As Integer
-            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_TransactionID,Integer)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)> _
+        Public Overridable Overloads Function Delete(ByVal Original_TransactionID As Integer, ByVal Original_PayeeName As String, ByVal Original_SepaDate As Date, ByVal Original_Amount As Decimal, ByVal Original_BIC As String, ByVal Original_IBAN As String, ByVal Original_IsPayment As Global.System.Nullable(Of Boolean), ByVal Original_FromAccount As String, ByVal Original_ToAccount As String, ByVal Original_Reference As String) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_TransactionID, Integer)
             If (Original_PayeeName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_PayeeName")
             Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_PayeeName,String)
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_PayeeName, String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_SepaDate,Date)
-            Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_Amount,Decimal)
+            Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_SepaDate, Date)
+            Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_Amount, Decimal)
             If (Original_BIC Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_BIC,String)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_BIC, String)
             End If
             If (Original_IBAN Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_IBAN,String)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_IBAN, String)
             End If
-            If (Original_IsPayment.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_IsPayment.Value,Boolean)
+            If (Original_IsPayment.HasValue = True) Then
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_IsPayment.Value, Boolean)
             Else
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(9).Value = Global.System.DBNull.Value
             End If
             If (Original_FromAccount Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_FromAccount")
             Else
-                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_FromAccount,String)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_FromAccount, String)
             End If
             If (Original_ToAccount Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_ToAccount,String)
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_ToAccount, String)
             End If
             If (Original_Reference Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_Reference,String)
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_Reference, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
-            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.DeleteCommand.Connection.Open
+                Me.Adapter.DeleteCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.DeleteCommand.Connection.Close
+                    Me.Adapter.DeleteCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal PayeeName As String, ByVal SepaDate As Date, ByVal Amount As Decimal, ByVal BIC As String, ByVal IBAN As String, ByVal IsPayment As Global.System.Nullable(Of Boolean), ByVal FromAccount As String, ByVal ToAccount As String, ByVal Reference As String) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, True)> _
+        Public Overridable Overloads Function Insert(ByVal PayeeName As String, ByVal SepaDate As Date, ByVal Amount As Decimal, ByVal BIC As String, ByVal IBAN As String, ByVal IsPayment As Global.System.Nullable(Of Boolean), ByVal FromAccount As String, ByVal ToAccount As String, ByVal Reference As String) As Integer
             If (PayeeName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("PayeeName")
             Else
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(PayeeName,String)
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(PayeeName, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(1).Value = CType(SepaDate,Date)
-            Me.Adapter.InsertCommand.Parameters(2).Value = CType(Amount,Decimal)
+            Me.Adapter.InsertCommand.Parameters(1).Value = CType(SepaDate, Date)
+            Me.Adapter.InsertCommand.Parameters(2).Value = CType(Amount, Decimal)
             If (BIC Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(BIC,String)
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(BIC, String)
             End If
             If (IBAN Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(IBAN,String)
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(IBAN, String)
             End If
-            If (IsPayment.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(IsPayment.Value,Boolean)
+            If (IsPayment.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(IsPayment.Value, Boolean)
             Else
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             If (FromAccount Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FromAccount")
             Else
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(FromAccount,String)
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(FromAccount, String)
             End If
             If (ToAccount Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(ToAccount,String)
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(ToAccount, String)
             End If
             If (Reference Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(Reference,String)
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(Reference, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
-            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.InsertCommand.Connection.Open
+                Me.Adapter.InsertCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.InsertCommand.Connection.Close
+                    Me.Adapter.InsertCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal PayeeName As String,  _
-                    ByVal SepaDate As Date,  _
-                    ByVal Amount As Decimal,  _
-                    ByVal BIC As String,  _
-                    ByVal IBAN As String,  _
-                    ByVal IsPayment As Global.System.Nullable(Of Boolean),  _
-                    ByVal FromAccount As String,  _
-                    ByVal ToAccount As String,  _
-                    ByVal Reference As String,  _
-                    ByVal Original_TransactionID As Integer,  _
-                    ByVal Original_PayeeName As String,  _
-                    ByVal Original_SepaDate As Date,  _
-                    ByVal Original_Amount As Decimal,  _
-                    ByVal Original_BIC As String,  _
-                    ByVal Original_IBAN As String,  _
-                    ByVal Original_IsPayment As Global.System.Nullable(Of Boolean),  _
-                    ByVal Original_FromAccount As String,  _
-                    ByVal Original_ToAccount As String,  _
-                    ByVal Original_Reference As String,  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)> _
+        Public Overridable Overloads Function Update( _
+                    ByVal PayeeName As String, _
+                    ByVal SepaDate As Date, _
+                    ByVal Amount As Decimal, _
+                    ByVal BIC As String, _
+                    ByVal IBAN As String, _
+                    ByVal IsPayment As Global.System.Nullable(Of Boolean), _
+                    ByVal FromAccount As String, _
+                    ByVal ToAccount As String, _
+                    ByVal Reference As String, _
+                    ByVal Original_TransactionID As Integer, _
+                    ByVal Original_PayeeName As String, _
+                    ByVal Original_SepaDate As Date, _
+                    ByVal Original_Amount As Decimal, _
+                    ByVal Original_BIC As String, _
+                    ByVal Original_IBAN As String, _
+                    ByVal Original_IsPayment As Global.System.Nullable(Of Boolean), _
+                    ByVal Original_FromAccount As String, _
+                    ByVal Original_ToAccount As String, _
+                    ByVal Original_Reference As String, _
                     ByVal TransactionID As Integer) As Integer
             If (PayeeName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("PayeeName")
             Else
-                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(PayeeName,String)
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(PayeeName, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(SepaDate,Date)
-            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Amount,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(SepaDate, Date)
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Amount, Decimal)
             If (BIC Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(BIC,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(BIC, String)
             End If
             If (IBAN Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(IBAN,String)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(IBAN, String)
             End If
-            If (IsPayment.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(IsPayment.Value,Boolean)
+            If (IsPayment.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(IsPayment.Value, Boolean)
             Else
                 Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             If (FromAccount Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FromAccount")
             Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(FromAccount,String)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(FromAccount, String)
             End If
             If (ToAccount Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(ToAccount,String)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(ToAccount, String)
             End If
             If (Reference Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Reference,String)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Reference, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_TransactionID,Integer)
+            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_TransactionID, Integer)
             If (Original_PayeeName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_PayeeName")
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_PayeeName,String)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_PayeeName, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_SepaDate,Date)
-            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_Amount,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_SepaDate, Date)
+            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_Amount, Decimal)
             If (Original_BIC Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_BIC,String)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_BIC, String)
             End If
             If (Original_IBAN Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_IBAN,String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_IBAN, String)
             End If
-            If (Original_IsPayment.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_IsPayment.Value,Boolean)
+            If (Original_IsPayment.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_IsPayment.Value, Boolean)
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             End If
             If (Original_FromAccount Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_FromAccount")
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_FromAccount,String)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_FromAccount, String)
             End If
             If (Original_ToAccount Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_ToAccount,String)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_ToAccount, String)
             End If
             If (Original_Reference Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_Reference,String)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_Reference, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(24).Value = CType(TransactionID,Integer)
+            Me.Adapter.UpdateCommand.Parameters(24).Value = CType(TransactionID, Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
-            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.UpdateCommand.Connection.Open
+                Me.Adapter.UpdateCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.UpdateCommand.Connection.Close
+                    Me.Adapter.UpdateCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal PayeeName As String,  _
-                    ByVal SepaDate As Date,  _
-                    ByVal Amount As Decimal,  _
-                    ByVal BIC As String,  _
-                    ByVal IBAN As String,  _
-                    ByVal IsPayment As Global.System.Nullable(Of Boolean),  _
-                    ByVal FromAccount As String,  _
-                    ByVal ToAccount As String,  _
-                    ByVal Reference As String,  _
-                    ByVal Original_TransactionID As Integer,  _
-                    ByVal Original_PayeeName As String,  _
-                    ByVal Original_SepaDate As Date,  _
-                    ByVal Original_Amount As Decimal,  _
-                    ByVal Original_BIC As String,  _
-                    ByVal Original_IBAN As String,  _
-                    ByVal Original_IsPayment As Global.System.Nullable(Of Boolean),  _
-                    ByVal Original_FromAccount As String,  _
-                    ByVal Original_ToAccount As String,  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)> _
+        Public Overridable Overloads Function Update( _
+                    ByVal PayeeName As String, _
+                    ByVal SepaDate As Date, _
+                    ByVal Amount As Decimal, _
+                    ByVal BIC As String, _
+                    ByVal IBAN As String, _
+                    ByVal IsPayment As Global.System.Nullable(Of Boolean), _
+                    ByVal FromAccount As String, _
+                    ByVal ToAccount As String, _
+                    ByVal Reference As String, _
+                    ByVal Original_TransactionID As Integer, _
+                    ByVal Original_PayeeName As String, _
+                    ByVal Original_SepaDate As Date, _
+                    ByVal Original_Amount As Decimal, _
+                    ByVal Original_BIC As String, _
+                    ByVal Original_IBAN As String, _
+                    ByVal Original_IsPayment As Global.System.Nullable(Of Boolean), _
+                    ByVal Original_FromAccount As String, _
+                    ByVal Original_ToAccount As String, _
                     ByVal Original_Reference As String) As Integer
             Return Me.Update(PayeeName, SepaDate, Amount, BIC, IBAN, IsPayment, FromAccount, ToAccount, Reference, Original_TransactionID, Original_PayeeName, Original_SepaDate, Original_Amount, Original_BIC, Original_IBAN, Original_IsPayment, Original_FromAccount, Original_ToAccount, Original_Reference, Original_TransactionID)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, False)> _
+        Public Overridable Overloads Function InsertQuery() As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(1)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open()
+            End If
+            Dim returnValue As Integer
+            Try
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close()
+                End If
+            End Try
+            Return returnValue
         End Function
     End Class
     

@@ -88,7 +88,7 @@ Partial Class transactionHandler
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(823, 41)
+        Me.btnSave.Location = New System.Drawing.Point(661, 12)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 21
@@ -97,7 +97,7 @@ Partial Class transactionHandler
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(823, 74)
+        Me.btnCancel.Location = New System.Drawing.Point(742, 12)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 22
@@ -106,7 +106,7 @@ Partial Class transactionHandler
         '
         'btnExit
         '
-        Me.btnExit.Location = New System.Drawing.Point(823, 104)
+        Me.btnExit.Location = New System.Drawing.Point(823, 12)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(75, 23)
         Me.btnExit.TabIndex = 23
@@ -125,7 +125,7 @@ Partial Class transactionHandler
         Me.gbTransfer.Controls.Add(Me.rtbTransferReference)
         Me.gbTransfer.Controls.Add(Me.cboTransferTo)
         Me.gbTransfer.Controls.Add(Me.cboTransferFrom)
-        Me.gbTransfer.Location = New System.Drawing.Point(12, 192)
+        Me.gbTransfer.Location = New System.Drawing.Point(12, 91)
         Me.gbTransfer.Name = "gbTransfer"
         Me.gbTransfer.Size = New System.Drawing.Size(368, 363)
         Me.gbTransfer.TabIndex = 24
@@ -230,7 +230,7 @@ Partial Class transactionHandler
         Me.gbPayment.Controls.Add(Me.txtPaymentPayee)
         Me.gbPayment.Controls.Add(Me.rtbPaymentReference)
         Me.gbPayment.Controls.Add(Me.cboPaymentFrom)
-        Me.gbPayment.Location = New System.Drawing.Point(530, 192)
+        Me.gbPayment.Location = New System.Drawing.Point(530, 91)
         Me.gbPayment.Name = "gbPayment"
         Me.gbPayment.Size = New System.Drawing.Size(368, 363)
         Me.gbPayment.TabIndex = 25
@@ -313,7 +313,7 @@ Partial Class transactionHandler
         '
         Me.rtbPaymentReference.Location = New System.Drawing.Point(6, 261)
         Me.rtbPaymentReference.Name = "rtbPaymentReference"
-        Me.rtbPaymentReference.Size = New System.Drawing.Size(299, 96)
+        Me.rtbPaymentReference.Size = New System.Drawing.Size(356, 96)
         Me.rtbPaymentReference.TabIndex = 1
         Me.rtbPaymentReference.Text = ""
         '
@@ -329,7 +329,7 @@ Partial Class transactionHandler
         '
         Me.gbTransactionSelect.Controls.Add(Me.radPayment)
         Me.gbTransactionSelect.Controls.Add(Me.radTransfer)
-        Me.gbTransactionSelect.Location = New System.Drawing.Point(12, 41)
+        Me.gbTransactionSelect.Location = New System.Drawing.Point(12, 12)
         Me.gbTransactionSelect.Name = "gbTransactionSelect"
         Me.gbTransactionSelect.Size = New System.Drawing.Size(401, 55)
         Me.gbTransactionSelect.TabIndex = 26
@@ -387,7 +387,7 @@ Partial Class transactionHandler
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(910, 581)
+        Me.ClientSize = New System.Drawing.Size(910, 464)
         Me.Controls.Add(Me.gbTransactionSelect)
         Me.Controls.Add(Me.gbPayment)
         Me.Controls.Add(Me.gbTransfer)
