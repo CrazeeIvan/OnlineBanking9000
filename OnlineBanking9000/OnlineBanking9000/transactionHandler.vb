@@ -79,26 +79,31 @@ Public Class transactionHandler
     End Sub
     Private Sub InitialiseInput()
         Try
+            'Initialise TransferFrom Combobox
             cboTransferFrom.Items.Clear()
-            cboTransferTo.Items.Clear()
             cboTransferFrom.Items.Add("Current")
             cboTransferFrom.Items.Add("Deposit")
-            cboTransferTo.Items.Add("Current")
+            cboTransferFrom.Items.Add("Loan")
+            cboTransferFrom.SelectedItem = "Current"
+
+            'Initialise TransferTo Combobox
+            cboTransferTo.Items.Clear()
             cboTransferTo.Items.Add("Deposit")
             cboTransferTo.Items.Add("Loan")
-            cboTransferFrom.SelectedIndex = 0
-            cboTransferTo.SelectedIndex = 1
+            cboTransferTo.SelectedItem = "Deposit"
+
             dtTransferDate.Value = Now
             dtTransferDate.MinDate = Now
+
             txtTransferAmount.Text = ""
             rtbTransferReference.Text = ""
 
-
+            'Initialise PaymentFrom Combobox
             cboPaymentFrom.Items.Clear()
             cboPaymentFrom.Items.Add("Current")
             cboPaymentFrom.Items.Add("Deposit")
-            cboPaymentFrom.Items.Add("Loan")
-            cboPaymentFrom.SelectedIndex = 0
+            cboPaymentFrom.SelectedItem = "Current"
+
             dtPaymentDate.Value = Now
             dtPaymentDate.MinDate = Now
 
@@ -113,5 +118,24 @@ Public Class transactionHandler
         Catch ex As Exception
             MsgBox("Warning: There was an error while OnlineBanker9000 was attempting to initialise. Please close the program and re-open it." + vbNewLine + "Original Error:" + vbNewLine)
         End Try
+    End Sub
+
+    Private Sub cboTransferFrom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTransferFrom.SelectedIndexChanged
+        If (cboTransferFrom.SelectedItem = "Current") Then
+            cboTransferTo.Items.Clear()
+            cboTransferTo.Items.Add("Deposit")
+            cboTransferTo.Items.Add("Loan")
+            cboTransferTo.SelectedItem = "Deposit"
+        ElseIf (cboTransferFrom.SelectedItem = "Deposit") Then
+            cboTransferTo.Items.Clear()
+            cboTransferTo.Items.Add("Current")
+            cboTransferTo.Items.Add("Loan")
+            cboTransferTo.SelectedItem = "Current"
+        ElseIf (cboTransferFrom.SelectedItem = "Loan") Then
+            cboTransferTo.Items.Clear()
+            cboTransferTo.Items.Add("Current")
+            cboTransferTo.Items.Add("Deposit")
+            cboTransferTo.SelectedItem = "Current"
+        End If
     End Sub
 End Class
