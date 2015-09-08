@@ -10,3 +10,15 @@ C:\Users\blue20\Documents\VSprojects\EventDrivenAssessment\OnlineBanking9000\Onl
 C:\Users\blue20\Documents\VSprojects\EventDrivenAssessment\OnlineBanking9000\OnlineBanking9000\obj\Debug\OnlineBanking9000.exe
 C:\Users\blue20\Documents\VSprojects\EventDrivenAssessment\OnlineBanking9000\OnlineBanking9000\obj\Debug\OnlineBanking9000.xml
 C:\Users\blue20\Documents\VSprojects\EventDrivenAssessment\OnlineBanking9000\OnlineBanking9000\obj\Debug\OnlineBanking9000.pdb
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\bin\Debug\OnlineBanking9000.exe.config
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\obj\Debug\OnlineBanking9000.exe
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\obj\Debug\OnlineBanking9000.xml
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\obj\Debug\OnlineBanking9000.pdb
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\bin\Debug\dbTransactions.mdf
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\bin\Debug\dbTransactions_log.ldf
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\bin\Debug\OnlineBanking9000.exe
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\bin\Debug\OnlineBanking9000.pdb
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\bin\Debug\OnlineBanking9000.xml
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\obj\Debug\OnlineBanking9000.Resources.resources
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\obj\Debug\OnlineBanking9000.transactionHandler.resources
+C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\obj\Debug\OnlineBanking9000.vbproj.GenerateResource.Cache
