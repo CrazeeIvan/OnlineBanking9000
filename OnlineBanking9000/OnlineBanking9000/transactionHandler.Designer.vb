@@ -48,11 +48,11 @@ Partial Class transactionHandler
         Me.lblPaymentPayee = New System.Windows.Forms.Label()
         Me.lblPaymentFrom = New System.Windows.Forms.Label()
         Me.lblPaymentReference = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtPaymentIBAN = New System.Windows.Forms.TextBox()
+        Me.txtPaymentBIC = New System.Windows.Forms.TextBox()
+        Me.txtPaymentPayee = New System.Windows.Forms.TextBox()
         Me.rtbPaymentReference = New System.Windows.Forms.RichTextBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.cboPaymentFrom = New System.Windows.Forms.ComboBox()
         Me.gbTransactionSelect = New System.Windows.Forms.GroupBox()
         Me.radPayment = New System.Windows.Forms.RadioButton()
         Me.radTransfer = New System.Windows.Forms.RadioButton()
@@ -201,7 +201,6 @@ Partial Class transactionHandler
         'cboTransferTo
         '
         Me.cboTransferTo.FormattingEnabled = True
-        Me.cboTransferTo.Items.AddRange(New Object() {"Current", "Deposit", "Loan"})
         Me.cboTransferTo.Location = New System.Drawing.Point(162, 71)
         Me.cboTransferTo.Name = "cboTransferTo"
         Me.cboTransferTo.Size = New System.Drawing.Size(200, 21)
@@ -210,7 +209,6 @@ Partial Class transactionHandler
         'cboTransferFrom
         '
         Me.cboTransferFrom.FormattingEnabled = True
-        Me.cboTransferFrom.Items.AddRange(New Object() {"Current", "Deposit"})
         Me.cboTransferFrom.Location = New System.Drawing.Point(162, 34)
         Me.cboTransferFrom.Name = "cboTransferFrom"
         Me.cboTransferFrom.Size = New System.Drawing.Size(200, 21)
@@ -227,11 +225,11 @@ Partial Class transactionHandler
         Me.gbPayment.Controls.Add(Me.lblPaymentPayee)
         Me.gbPayment.Controls.Add(Me.lblPaymentFrom)
         Me.gbPayment.Controls.Add(Me.lblPaymentReference)
-        Me.gbPayment.Controls.Add(Me.TextBox3)
-        Me.gbPayment.Controls.Add(Me.TextBox2)
-        Me.gbPayment.Controls.Add(Me.TextBox1)
+        Me.gbPayment.Controls.Add(Me.txtPaymentIBAN)
+        Me.gbPayment.Controls.Add(Me.txtPaymentBIC)
+        Me.gbPayment.Controls.Add(Me.txtPaymentPayee)
         Me.gbPayment.Controls.Add(Me.rtbPaymentReference)
-        Me.gbPayment.Controls.Add(Me.ComboBox3)
+        Me.gbPayment.Controls.Add(Me.cboPaymentFrom)
         Me.gbPayment.Location = New System.Drawing.Point(530, 192)
         Me.gbPayment.Name = "gbPayment"
         Me.gbPayment.Size = New System.Drawing.Size(368, 363)
@@ -290,26 +288,26 @@ Partial Class transactionHandler
         Me.lblPaymentReference.TabIndex = 5
         Me.lblPaymentReference.Text = "Reference"
         '
-        'TextBox3
+        'txtPaymentIBAN
         '
-        Me.TextBox3.Location = New System.Drawing.Point(162, 126)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(200, 20)
-        Me.TextBox3.TabIndex = 4
+        Me.txtPaymentIBAN.Location = New System.Drawing.Point(162, 126)
+        Me.txtPaymentIBAN.Name = "txtPaymentIBAN"
+        Me.txtPaymentIBAN.Size = New System.Drawing.Size(200, 20)
+        Me.txtPaymentIBAN.TabIndex = 4
         '
-        'TextBox2
+        'txtPaymentBIC
         '
-        Me.TextBox2.Location = New System.Drawing.Point(162, 99)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(200, 20)
-        Me.TextBox2.TabIndex = 3
+        Me.txtPaymentBIC.Location = New System.Drawing.Point(162, 99)
+        Me.txtPaymentBIC.Name = "txtPaymentBIC"
+        Me.txtPaymentBIC.Size = New System.Drawing.Size(200, 20)
+        Me.txtPaymentBIC.TabIndex = 3
         '
-        'TextBox1
+        'txtPaymentPayee
         '
-        Me.TextBox1.Location = New System.Drawing.Point(162, 71)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(200, 20)
-        Me.TextBox1.TabIndex = 2
+        Me.txtPaymentPayee.Location = New System.Drawing.Point(162, 71)
+        Me.txtPaymentPayee.Name = "txtPaymentPayee"
+        Me.txtPaymentPayee.Size = New System.Drawing.Size(200, 20)
+        Me.txtPaymentPayee.TabIndex = 2
         '
         'rtbPaymentReference
         '
@@ -319,13 +317,13 @@ Partial Class transactionHandler
         Me.rtbPaymentReference.TabIndex = 1
         Me.rtbPaymentReference.Text = ""
         '
-        'ComboBox3
+        'cboPaymentFrom
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(162, 31)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(200, 21)
-        Me.ComboBox3.TabIndex = 0
+        Me.cboPaymentFrom.FormattingEnabled = True
+        Me.cboPaymentFrom.Location = New System.Drawing.Point(162, 31)
+        Me.cboPaymentFrom.Name = "cboPaymentFrom"
+        Me.cboPaymentFrom.Size = New System.Drawing.Size(200, 21)
+        Me.cboPaymentFrom.TabIndex = 0
         '
         'gbTransactionSelect
         '
@@ -425,14 +423,14 @@ Partial Class transactionHandler
     Friend WithEvents cboTransferTo As System.Windows.Forms.ComboBox
     Friend WithEvents cboTransferFrom As System.Windows.Forms.ComboBox
     Friend WithEvents rtbPaymentReference As System.Windows.Forms.RichTextBox
-    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboPaymentFrom As System.Windows.Forms.ComboBox
     Friend WithEvents lblTransferReference As System.Windows.Forms.Label
     Friend WithEvents lblTransferTo As System.Windows.Forms.Label
     Friend WithEvents lblTransferFrom As System.Windows.Forms.Label
     Friend WithEvents lblPaymentReference As System.Windows.Forms.Label
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtPaymentIBAN As System.Windows.Forms.TextBox
+    Friend WithEvents txtPaymentBIC As System.Windows.Forms.TextBox
+    Friend WithEvents txtPaymentPayee As System.Windows.Forms.TextBox
     Friend WithEvents lblPaymentIBAN As System.Windows.Forms.Label
     Friend WithEvents lblPaymentBIC As System.Windows.Forms.Label
     Friend WithEvents lblPaymentPayee As System.Windows.Forms.Label
