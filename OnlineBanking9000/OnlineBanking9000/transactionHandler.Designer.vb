@@ -23,10 +23,6 @@ Partial Class transactionHandler
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.DbTransactionsDataSet = New OnlineBanking9000.dbTransactionsDataSet()
-        Me.TblSepaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TblSepaTableAdapter = New OnlineBanking9000.dbTransactionsDataSetTableAdapters.tblSepaTableAdapter()
-        Me.TableAdapterManager = New OnlineBanking9000.dbTransactionsDataSetTableAdapters.TableAdapterManager()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
@@ -42,6 +38,9 @@ Partial Class transactionHandler
         Me.cboTransferTo = New System.Windows.Forms.ComboBox()
         Me.cboTransferFrom = New System.Windows.Forms.ComboBox()
         Me.gbPayment = New System.Windows.Forms.GroupBox()
+        Me.txtPaymentAmount = New System.Windows.Forms.TextBox()
+        Me.lblPaymentAmount = New System.Windows.Forms.Label()
+        Me.lblPaymentDate = New System.Windows.Forms.Label()
         Me.dtPaymentDate = New System.Windows.Forms.DateTimePicker()
         Me.lblPaymentIBAN = New System.Windows.Forms.Label()
         Me.lblPaymentBIC = New System.Windows.Forms.Label()
@@ -56,35 +55,29 @@ Partial Class transactionHandler
         Me.gbTransactionSelect = New System.Windows.Forms.GroupBox()
         Me.radPayment = New System.Windows.Forms.RadioButton()
         Me.radTransfer = New System.Windows.Forms.RadioButton()
-        Me.txtPaymentAmount = New System.Windows.Forms.TextBox()
-        Me.lblPaymentAmount = New System.Windows.Forms.Label()
-        Me.lblPaymentDate = New System.Windows.Forms.Label()
-        CType(Me.DbTransactionsDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TblSepaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DbTransactionsDataSet = New OnlineBanking9000.dbTransactionsDataSet()
+        Me.TblSepaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TblSepaTableAdapter = New OnlineBanking9000.dbTransactionsDataSetTableAdapters.tblSepaTableAdapter()
+        Me.TableAdapterManager = New OnlineBanking9000.dbTransactionsDataSetTableAdapters.TableAdapterManager()
+        Me.chkDebug = New System.Windows.Forms.CheckBox()
+        Me.dgvDebug = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gbTransfer.SuspendLayout()
         Me.gbPayment.SuspendLayout()
         Me.gbTransactionSelect.SuspendLayout()
+        CType(Me.DbTransactionsDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TblSepaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvDebug, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'DbTransactionsDataSet
-        '
-        Me.DbTransactionsDataSet.DataSetName = "dbTransactionsDataSet"
-        Me.DbTransactionsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'TblSepaBindingSource
-        '
-        Me.TblSepaBindingSource.DataMember = "tblSepa"
-        Me.TblSepaBindingSource.DataSource = Me.DbTransactionsDataSet
-        '
-        'TblSepaTableAdapter
-        '
-        Me.TblSepaTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.tblSepaTableAdapter = Me.TblSepaTableAdapter
-        Me.TableAdapterManager.UpdateOrder = OnlineBanking9000.dbTransactionsDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'btnSave
         '
@@ -236,6 +229,31 @@ Partial Class transactionHandler
         Me.gbPayment.TabIndex = 25
         Me.gbPayment.TabStop = False
         '
+        'txtPaymentAmount
+        '
+        Me.txtPaymentAmount.Location = New System.Drawing.Point(162, 211)
+        Me.txtPaymentAmount.Name = "txtPaymentAmount"
+        Me.txtPaymentAmount.Size = New System.Drawing.Size(200, 20)
+        Me.txtPaymentAmount.TabIndex = 13
+        '
+        'lblPaymentAmount
+        '
+        Me.lblPaymentAmount.AutoSize = True
+        Me.lblPaymentAmount.Location = New System.Drawing.Point(23, 211)
+        Me.lblPaymentAmount.Name = "lblPaymentAmount"
+        Me.lblPaymentAmount.Size = New System.Drawing.Size(43, 13)
+        Me.lblPaymentAmount.TabIndex = 12
+        Me.lblPaymentAmount.Text = "Amount"
+        '
+        'lblPaymentDate
+        '
+        Me.lblPaymentDate.AutoSize = True
+        Me.lblPaymentDate.Location = New System.Drawing.Point(23, 172)
+        Me.lblPaymentDate.Name = "lblPaymentDate"
+        Me.lblPaymentDate.Size = New System.Drawing.Size(30, 13)
+        Me.lblPaymentDate.TabIndex = 11
+        Me.lblPaymentDate.Text = "Date"
+        '
         'dtPaymentDate
         '
         Me.dtPaymentDate.Location = New System.Drawing.Point(162, 173)
@@ -358,36 +376,116 @@ Partial Class transactionHandler
         Me.radTransfer.Text = "Transfer"
         Me.radTransfer.UseVisualStyleBackColor = True
         '
-        'txtPaymentAmount
+        'DbTransactionsDataSet
         '
-        Me.txtPaymentAmount.Location = New System.Drawing.Point(162, 211)
-        Me.txtPaymentAmount.Name = "txtPaymentAmount"
-        Me.txtPaymentAmount.Size = New System.Drawing.Size(200, 20)
-        Me.txtPaymentAmount.TabIndex = 13
+        Me.DbTransactionsDataSet.DataSetName = "dbTransactionsDataSet"
+        Me.DbTransactionsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'lblPaymentAmount
+        'TblSepaBindingSource
         '
-        Me.lblPaymentAmount.AutoSize = True
-        Me.lblPaymentAmount.Location = New System.Drawing.Point(23, 211)
-        Me.lblPaymentAmount.Name = "lblPaymentAmount"
-        Me.lblPaymentAmount.Size = New System.Drawing.Size(43, 13)
-        Me.lblPaymentAmount.TabIndex = 12
-        Me.lblPaymentAmount.Text = "Amount"
+        Me.TblSepaBindingSource.DataMember = "tblSepa"
+        Me.TblSepaBindingSource.DataSource = Me.DbTransactionsDataSet
         '
-        'lblPaymentDate
+        'TblSepaTableAdapter
         '
-        Me.lblPaymentDate.AutoSize = True
-        Me.lblPaymentDate.Location = New System.Drawing.Point(23, 172)
-        Me.lblPaymentDate.Name = "lblPaymentDate"
-        Me.lblPaymentDate.Size = New System.Drawing.Size(30, 13)
-        Me.lblPaymentDate.TabIndex = 11
-        Me.lblPaymentDate.Text = "Date"
+        Me.TblSepaTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.tblSepaTableAdapter = Me.TblSepaTableAdapter
+        Me.TableAdapterManager.UpdateOrder = OnlineBanking9000.dbTransactionsDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        '
+        'chkDebug
+        '
+        Me.chkDebug.AutoSize = True
+        Me.chkDebug.Location = New System.Drawing.Point(556, 12)
+        Me.chkDebug.Name = "chkDebug"
+        Me.chkDebug.Size = New System.Drawing.Size(88, 17)
+        Me.chkDebug.TabIndex = 27
+        Me.chkDebug.Text = "Debug Mode"
+        Me.chkDebug.UseVisualStyleBackColor = True
+        '
+        'dgvDebug
+        '
+        Me.dgvDebug.AutoGenerateColumns = False
+        Me.dgvDebug.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvDebug.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewCheckBoxColumn1, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
+        Me.dgvDebug.DataSource = Me.TblSepaBindingSource
+        Me.dgvDebug.Location = New System.Drawing.Point(18, 460)
+        Me.dgvDebug.Name = "dgvDebug"
+        Me.dgvDebug.Size = New System.Drawing.Size(880, 220)
+        Me.dgvDebug.TabIndex = 27
+        Me.dgvDebug.Visible = False
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "TransactionID"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "TransactionID"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "PayeeName"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "PayeeName"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "SepaDate"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "SepaDate"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "Amount"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Amount"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "BIC"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "BIC"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "IBAN"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "IBAN"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        '
+        'DataGridViewCheckBoxColumn1
+        '
+        Me.DataGridViewCheckBoxColumn1.DataPropertyName = "IsPayment"
+        Me.DataGridViewCheckBoxColumn1.HeaderText = "IsPayment"
+        Me.DataGridViewCheckBoxColumn1.Name = "DataGridViewCheckBoxColumn1"
+        '
+        'DataGridViewTextBoxColumn7
+        '
+        Me.DataGridViewTextBoxColumn7.DataPropertyName = "FromAccount"
+        Me.DataGridViewTextBoxColumn7.HeaderText = "FromAccount"
+        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        '
+        'DataGridViewTextBoxColumn8
+        '
+        Me.DataGridViewTextBoxColumn8.DataPropertyName = "ToAccount"
+        Me.DataGridViewTextBoxColumn8.HeaderText = "ToAccount"
+        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        '
+        'DataGridViewTextBoxColumn9
+        '
+        Me.DataGridViewTextBoxColumn9.DataPropertyName = "Reference"
+        Me.DataGridViewTextBoxColumn9.HeaderText = "Reference"
+        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
         '
         'transactionHandler
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(910, 464)
+        Me.ClientSize = New System.Drawing.Size(918, 731)
+        Me.Controls.Add(Me.dgvDebug)
+        Me.Controls.Add(Me.chkDebug)
         Me.Controls.Add(Me.gbTransactionSelect)
         Me.Controls.Add(Me.gbPayment)
         Me.Controls.Add(Me.gbTransfer)
@@ -396,15 +494,17 @@ Partial Class transactionHandler
         Me.Controls.Add(Me.btnSave)
         Me.Name = "transactionHandler"
         Me.Text = "Event Driven Programming Solutions Assignment - 8th-Sept-2015"
-        CType(Me.DbTransactionsDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TblSepaBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbTransfer.ResumeLayout(False)
         Me.gbTransfer.PerformLayout()
         Me.gbPayment.ResumeLayout(False)
         Me.gbPayment.PerformLayout()
         Me.gbTransactionSelect.ResumeLayout(False)
         Me.gbTransactionSelect.PerformLayout()
+        CType(Me.DbTransactionsDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TblSepaBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvDebug, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents DbTransactionsDataSet As OnlineBanking9000.dbTransactionsDataSet
@@ -443,5 +543,17 @@ Partial Class transactionHandler
     Friend WithEvents txtPaymentAmount As System.Windows.Forms.TextBox
     Friend WithEvents lblPaymentAmount As System.Windows.Forms.Label
     Friend WithEvents lblPaymentDate As System.Windows.Forms.Label
+    Friend WithEvents chkDebug As System.Windows.Forms.CheckBox
+    Friend WithEvents dgvDebug As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewCheckBoxColumn1 As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class
