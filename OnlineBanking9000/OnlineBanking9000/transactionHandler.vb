@@ -3,15 +3,17 @@ Imports System.Data.Sql
 Imports System.Data.SqlClient
 
 Public Class transactionHandler
+    Dim connectionString As String
+    Dim cnMySQLConnection As New SqlConnection
     Private Sub transactionHandler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'DbTransactionsDataSet.tblSepa' table. You can move, or remove it, as needed.
-        'Me.TblSepaTableAdapter.Fill(Me.DbTransactionsDataSet.tblSepa)
         InitialiseInput()
         gbTransfer.Enabled = False
         gbPayment.Enabled = False
+        Debug()
+        ConnectToDatabase()
     End Sub
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        Dim msg = "Are you sure you would like to exit the OnlineBanker9000?" + vbNewLine + "All data you have entered will be lost!"
+        Dim msg = "Are you sure you would like to exit the OnlineBanker9000?" + vbNewLine + "All unsaved data will be lost!"
         ' Now define a style for the message box. In this example, the 
         ' message box will have Yes and No buttons, the default will be 
         ' the No button, and a Critical Message icon will be present. 
@@ -21,7 +23,10 @@ Public Class transactionHandler
         Dim response = MsgBox(msg, style)
         ' Take some action based on the response. 
         If response = MsgBoxResult.Yes Then
-            MsgBox("Program was closed by user!", )
+            MsgBox("OnlineBanker9000 was closed by user!", )
+            If cnMySQLConnection.State = ConnectionState.Open Then
+                cnMySQLConnection.Close()
+            End If
             Me.Close()
         Else
             MsgBox("Exit aborted by user!", )
@@ -29,148 +34,74 @@ Public Class transactionHandler
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Try
-            Dim connectionString As String = "Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\dbTransactions.mdf;Integrated Security=True"
-            If (radTransfer.Checked = True) Then
+        Dim cmdMySQLCommand As New SqlCommand
+        Dim strMyQuery As String = String.Empty
+        If (radTransfer.Checked = True) Then
+            strMyQuery = "INSERT INTO tblSepa (IsPayment,SepaDate,Amount,FromAccount,ToAccount, Reference)"
+            strMyQuery &= "Values ('False',@SepaDate,@Amount,@FromAccount,@ToAccount, @reference)"
+            Try
+                With cmdMySQLCommand
+                    .Connection = cnMySQLConnection
+                    .CommandText = strMyQuery
+                    .Parameters.AddWithValue("@SepaDate", dtTransferDate.Text)
+                    .Parameters.AddWithValue("@Amount", txtTransferAmount.Text)
+                    .Parameters.AddWithValue("@FromAccount", cboTransferFrom.Text)
+                    .Parameters.AddWithValue("@ToAccount", cboTransferTo.Text)
+                    .Parameters.AddWithValue("@reference", rtbTransferReference.Text)
+                End With
+                If cnMySQLConnection.State = ConnectionState.Closed Then
+                    connectionString = "Data Source=(LocalDB)\v11.0;AttachDbFilename=c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf;Integrated Security=True"
+                    cnMySQLConnection = New SqlConnection(connectionString)
+                    cnMySQLConnection.Open()
+                End If
+                cmdMySQLCommand.ExecuteNonQuery()
+                cnMySQLConnection.Close()
+                MsgBox("Transfer completed successfully!" + vbNewLine + "€" + txtTransferAmount.Text + " successfully transferred from " + cboTransferFrom.SelectedItem + " to " + cboTransferTo.SelectedItem + ".")
+                InitialiseInput()
+                radTransfer.Checked = False
+                radPayment.Checked = False
+                gbTransfer.Enabled = False
+                gbPayment.Enabled = False
+            Catch ex As SqlException
+                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
+            End Try
 
-                Using cn As New SqlConnection(connectionString)
-                    cn.Open()
-                    Dim cmd As New SqlCommand()
-                    cmd.CommandText = "INSERT INTO tblSepa VALUES(@TransactionID,@PayeeName,@SepaDate,@Amount,@BIC, @IBAN, @IsPayment, @FromAccount, @ToAccount, @Reference)"
-                    
-                    Dim param1 As New SqlParameter()
-                    param1.ParameterName = "@TransactionID"
-                    param1.Value = 1
-                    cmd.Parameters.Add(param1)
+        ElseIf (radPayment.Checked = True) Then
+            strMyQuery = "INSERT INTO tblSepa (IsPayment, PayeeName,SepaDate,Amount,FromAccount, BIC,IBAN, Reference)"
+            strMyQuery &= "Values ('True', @PayeeName,@SepaDate,@Amount,@FromAccount,@BIC,@IBAN,@reference)"
+            Try
+                With cmdMySQLCommand
+                    .Connection = cnMySQLConnection
+                    .CommandText = strMyQuery
+                    .Parameters.AddWithValue("@PayeeName", txtPaymentPayee.Text)
+                    .Parameters.AddWithValue("@SepaDate", dtPaymentDate.Text)
+                    .Parameters.AddWithValue("@Amount", txtPaymentAmount.Text)
+                    .Parameters.AddWithValue("@FromAccount", cboPaymentFrom.Text)
+                    .Parameters.AddWithValue("@BIC", txtPaymentBIC.Text)
+                    .Parameters.AddWithValue("@IBAN", txtPaymentIBAN.Text)
+                    .Parameters.AddWithValue("@reference", rtbPaymentReference.Text)
+                End With
+                If cnMySQLConnection.State = ConnectionState.Closed Then
+                    connectionString = "Data Source=(LocalDB)\v11.0;AttachDbFilename=c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf;Integrated Security=True"
+                    cnMySQLConnection = New SqlConnection(connectionString)
+                    cnMySQLConnection.Open()
+                End If
+                cmdMySQLCommand.ExecuteNonQuery()
+                cnMySQLConnection.Close()
+                MsgBox("Payment completed successfully!" + vbNewLine + "€" + txtPaymentAmount.Text + " successfully paid from " + cboPaymentFrom.SelectedItem + " to " + txtPaymentPayee.Text + ".")
+                InitialiseInput()
+                radTransfer.Checked = False
+                radPayment.Checked = False
+                gbTransfer.Enabled = False
+                gbPayment.Enabled = False
+            Catch ex As SqlException
+                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
+            End Try
 
-                    Dim param2 As New SqlParameter()
-                    param2.ParameterName = "@PayeeName"
-                    param2.Value = "Test"
-                    cmd.Parameters.Add(param2)
-
-                    Dim param3 As New SqlParameter()
-                    param3.ParameterName = "@SepaDate"
-                    param3.Value = dtTransferDate.Value
-                    cmd.Parameters.Add(param3)
-
-                    Dim param4 As New SqlParameter()
-                    param4.ParameterName = "@Amount"
-                    param4.Value = txtTransferAmount.Text
-                    cmd.Parameters.Add(param4)
-
-                    Dim param5 As New SqlParameter()
-                    param5.ParameterName = "@BIC"
-                    param5.Value = vbNull
-                    cmd.Parameters.Add(param5)
-
-                    Dim param6 As New SqlParameter()
-                    param6.ParameterName = "@IBAN"
-                    param6.Value = vbNull
-                    cmd.Parameters.Add(param6)
-
-                    Dim param7 As New SqlParameter()
-                    param7.ParameterName = "@IsPayment"
-                    param7.Value = vbNull
-                    cmd.Parameters.Add(param7)
-
-                    Dim param8 As New SqlParameter()
-                    param8.ParameterName = "@FromAccount"
-                    param8.Value = vbNull
-                    cmd.Parameters.Add(param8)
-
-                    Dim param9 As New SqlParameter()
-                    param9.ParameterName = "@ToAccount"
-                    param9.Value = vbNull
-                    cmd.Parameters.Add(param9)
-
-                    Dim param10 As New SqlParameter()
-                    param10.ParameterName = "@Reference"
-                    param10.Value = rtbTransferReference.Text
-                    cmd.Parameters.Add(param10)
-
-                    
-
-                   
-
-                    cmd.Connection = cn
-                    cmd.ExecuteNonQuery()
-                    cn.Close()
-                    MsgBox("Transaction completed successfully!")
-                End Using
-            ElseIf (radPayment.Checked = True) Then
-                Using cn As New SqlConnection(connectionString)
-                    cn.Open()
-                    Dim cmd As New SqlCommand()
-                    cmd.CommandText = "INSERT INTO tblSepa VALUES(@TransactionID,@PayeeName,@SepaDate,@Amount,@BIC, @IBAN, @IsPayment, @FromAccount, @ToAccount, @Reference)"
-
-                    Dim param1 As New SqlParameter()
-                    param1.ParameterName = "@TransactionID"
-                    'param1.Value = rowCount +1
-                    cmd.Parameters.Add(param1)
-
-                    'Dim param2 As New SqlParameter()
-                    'param2.ParameterName = "@PayeeName"
-                    'param2.Value = txtPassword.Text.Trim()
-                    'cmd.Parameters.Add(param2)
-
-                    Dim param3 As New SqlParameter()
-                    param3.ParameterName = "@SepaDate"
-                    param3.Value = dtTransferDate.Value
-                    cmd.Parameters.Add(param3)
-
-                    Dim param4 As New SqlParameter()
-                    param4.ParameterName = "@Amount"
-                    param4.Value = txtTransferAmount.Text
-                    cmd.Parameters.Add(param4)
-
-                    'Dim param5 As New SqlParameter()
-                    'param5.ParameterName = "@BIC"
-                    'param5.Value = txtSecurityAnswer.Text.Trim()
-                    'cmd.Parameters.Add(param5)
-
-                    'Dim param4 As New SqlParameter()
-                    'param4.ParameterName = "@IBAN"
-                    'param4.Value = txtSecurityQuestion.Text.Trim()
-                    'cmd.Parameters.Add(param4)
-
-                    'Dim param5 As New SqlParameter()
-                    'param5.ParameterName = "@IsPayment"
-                    'param5.Value = txtSecurityAnswer.Text.Trim()
-                    'cmd.Parameters.Add(param5)
-
-                    Dim param6 As New SqlParameter()
-                    param6.ParameterName = "@FromAccount"
-                    'param6.Value = txtSecurityQuestion.Text.Trim()
-                    cmd.Parameters.Add(param6)
-
-                    Dim param7 As New SqlParameter()
-                    param7.ParameterName = "@ToAccount"
-                    'param5.Value = txtSecurityAnswer.Text.Trim()
-                    cmd.Parameters.Add(param7)
-
-                    Dim param8 As New SqlParameter()
-                    param8.ParameterName = "@Reference"
-                    'param8.Value = txtSecurityQuestion.Text.Trim()
-                    cmd.Parameters.Add(param8)
-
-                    cmd.Connection = cn
-                    cmd.ExecuteNonQuery()
-                    cn.Close()
-                End Using
-            Else
-                    MsgBox("Please select a Transaction type before continuing.")
-            End If
-
-        Catch ex As Exception
-            MsgBox("Online Banker 9000 was unable to save your transaction at this time." + vbNewLine + "Please try again later" + vbNewLine + "Original Error:" + vbNewLine + ex.ToString())
-
-            'Errolbl.Show()
-            'Errolbl.Text = "Your account was not created.Please try again."
-        End Try
-
-        Me.Validate()
-        Me.TblSepaBindingSource.EndEdit()
-        Me.TableAdapterManager.UpdateAll(Me.DbTransactionsDataSet)
+        Else
+            MsgBox("Please select a Transaction type before continuing.")
+        End If
+        Debug()
     End Sub
 
     Private Sub radTransfer_CheckedChanged(sender As Object, e As EventArgs) Handles radTransfer.CheckedChanged
@@ -201,6 +132,16 @@ Public Class transactionHandler
             MsgBox("Cancel aborted by user!", ) 'If response is no then abort cancel and show a confirmation to the user
         End If
 
+    End Sub
+    Private Sub ConnectToDatabase()
+        connectionString = "Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf;Integrated Security=True"
+        cnMySQLConnection = New SqlConnection(connectionString)
+        Try
+            cnMySQLConnection.Open()
+            MsgBox("Online Banker 9000 successfully connected to the Transaction database.")
+        Catch ex As Exception
+            MsgBox("Online Banker 9000 was unable to connect to the Transaction database!" + vbNewLine + "Please ensure that database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
+        End Try
     End Sub
     Private Sub InitialiseInput()
         Try
@@ -236,13 +177,12 @@ Public Class transactionHandler
             txtPaymentAmount.Text = ""
             rtbPaymentReference.Text = ""
         Catch ex As Exception
-            MsgBox("Warning: There was an error while OnlineBanker9000 was attempting to initialise. Please close the program and re-open it." + vbNewLine + "Original Error:" + vbNewLine)
+            MsgBox("Warning: There was an error while OnlineBanker9000 was attempting to initialise. Please close the program and re-open it." + vbNewLine + "Original Error:" + vbNewLine + ex.Message.ToString())
         End Try
     End Sub
 
     Private Sub cboTransferFrom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTransferFrom.SelectedIndexChanged
         'When TransferFrom combobox's value is changed, update TransferTo combobox to remove the invalid options
-
         If (cboTransferFrom.SelectedItem = "Current") Then 'If 'Current' is selected, remove 'Current' from the TransferTo Combobox
             cboTransferTo.Items.Clear()
             cboTransferTo.Items.Add("Deposit")
@@ -263,10 +203,30 @@ Public Class transactionHandler
     End Sub
 
     Private Sub chkDebug_CheckedChanged(sender As Object, e As EventArgs) Handles chkDebug.CheckedChanged
+        Debug()
         If (chkDebug.Checked = True) Then
             dgvDebug.Visible = True
         ElseIf (chkDebug.Checked = False) Then
             dgvDebug.Visible = False
         End If
+    End Sub
+    Private Sub Debug()
+        Dim strDebugConnectionString As String = "Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf;Integrated Security=True"
+        Dim cnDebugSQLConnection = New SqlConnection(strDebugConnectionString)
+        Dim strDebugQuery As String = "Select * From tblSepa"
+        Dim dtDebugDataTable As New DataTable
+        Dim cmdDebugSQLCommand As New SqlCommand(strDebugQuery, cnDebugSQLConnection)
+        Dim daDebugDataAdapter As New SqlDataAdapter(strDebugQuery, cnDebugSQLConnection)
+        Dim dsDebugDataSet As New DataSet()
+        Try
+            cnDebugSQLConnection.Open()
+            daDebugDataAdapter.Fill(dsDebugDataSet, "tblSepa")
+            cnDebugSQLConnection.Close()
+            dgvDebug.DataSource = dsDebugDataSet
+            dgvDebug.DataMember = "tblSepa"
+        Catch ex As Exception
+            MsgBox("Online Banker 9000 encountered an error while trying to launch debugging tools." + vbNewLine + "Original Error:" + vbNewLine + ex.Message.ToString())
+        End Try
+
     End Sub
 End Class
