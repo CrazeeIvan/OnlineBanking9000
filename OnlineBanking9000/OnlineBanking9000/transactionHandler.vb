@@ -5,6 +5,8 @@ Imports System.Data.SqlClient
 Public Class transactionHandler
     Dim connectionString As String
     Dim cnMySQLConnection As New SqlConnection
+
+
     Private Sub transactionHandler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitialiseInput()
         gbTransfer.Enabled = False
@@ -40,6 +42,11 @@ Public Class transactionHandler
             strMyQuery = "INSERT INTO tblSepa (IsPayment,SepaDate,Amount,FromAccount,ToAccount, Reference)"
             strMyQuery &= "Values ('False',@SepaDate,@Amount,@FromAccount,@ToAccount, @reference)"
             Try
+                connectionString = "Data Source=(LocalDB)\v11.0;AttachDbFilename=c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf;Integrated Security=True"
+                If cnMySQLConnection.State = ConnectionState.Closed Then
+                    cnMySQLConnection = New SqlConnection(connectionString)
+                    cnMySQLConnection.Open()
+                End If
                 With cmdMySQLCommand
                     .Connection = cnMySQLConnection
                     .CommandText = strMyQuery
@@ -49,11 +56,7 @@ Public Class transactionHandler
                     .Parameters.AddWithValue("@ToAccount", cboTransferTo.Text)
                     .Parameters.AddWithValue("@reference", rtbTransferReference.Text)
                 End With
-                If cnMySQLConnection.State = ConnectionState.Closed Then
-                    connectionString = "Data Source=(LocalDB)\v11.0;AttachDbFilename=c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf;Integrated Security=True"
-                    cnMySQLConnection = New SqlConnection(connectionString)
-                    cnMySQLConnection.Open()
-                End If
+                
                 cmdMySQLCommand.ExecuteNonQuery()
                 cnMySQLConnection.Close()
                 MsgBox("Transfer completed successfully!" + vbNewLine + "€" + txtTransferAmount.Text + " successfully transferred from " + cboTransferFrom.SelectedItem + " to " + cboTransferTo.SelectedItem + ".")
@@ -62,14 +65,19 @@ Public Class transactionHandler
                 radPayment.Checked = False
                 gbTransfer.Enabled = False
                 gbPayment.Enabled = False
-            Catch ex As SqlException
-                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that the database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
+            Catch ex As Exception
+                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that the database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + vbNewLine + "Original Error: " + vbNewLine + ex.Message.ToString())
             End Try
 
         ElseIf (radPayment.Checked = True) Then
             strMyQuery = "INSERT INTO tblSepa (IsPayment, PayeeName,SepaDate,Amount,FromAccount, BIC,IBAN, Reference)"
             strMyQuery &= "Values ('True', @PayeeName,@SepaDate,@Amount,@FromAccount,@BIC,@IBAN,@reference)"
             Try
+                connectionString = "Data Source=(LocalDB)\v11.0;AttachDbFilename=c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf;Integrated Security=True"
+                If cnMySQLConnection.State = ConnectionState.Closed Then
+                    cnMySQLConnection = New SqlConnection(connectionString)
+                    cnMySQLConnection.Open()
+                End If
                 With cmdMySQLCommand
                     .Connection = cnMySQLConnection
                     .CommandText = strMyQuery
@@ -81,11 +89,6 @@ Public Class transactionHandler
                     .Parameters.AddWithValue("@IBAN", txtPaymentIBAN.Text)
                     .Parameters.AddWithValue("@reference", rtbPaymentReference.Text)
                 End With
-                If cnMySQLConnection.State = ConnectionState.Closed Then
-                    connectionString = "Data Source=(LocalDB)\v11.0;AttachDbFilename=c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf;Integrated Security=True"
-                    cnMySQLConnection = New SqlConnection(connectionString)
-                    cnMySQLConnection.Open()
-                End If
                 cmdMySQLCommand.ExecuteNonQuery()
                 cnMySQLConnection.Close()
                 MsgBox("Payment completed successfully!" + vbNewLine + "€" + txtPaymentAmount.Text + " successfully paid from " + cboPaymentFrom.SelectedItem + " to " + txtPaymentPayee.Text + ".")
@@ -94,8 +97,8 @@ Public Class transactionHandler
                 radPayment.Checked = False
                 gbTransfer.Enabled = False
                 gbPayment.Enabled = False
-            Catch ex As SqlException
-                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that the database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
+            Catch ex As Exception
+                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that the database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + vbNewLine + "Original Error: " + vbNewLine + ex.Message.ToString())
             End Try
 
         Else
@@ -139,7 +142,7 @@ Public Class transactionHandler
             cnMySQLConnection.Open()
             MsgBox("Online Banker 9000 successfully connected to the Transaction database.")
         Catch ex As Exception
-            MsgBox("Online Banker 9000 was unable to connect to the Transaction database!" + vbNewLine + "Please ensure that the database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
+            MsgBox("Online Banker 9000 was unable to connect to the Transaction database!" + vbNewLine + "Please ensure that the database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + vbNewLine + "Original Error: " + vbNewLine + ex.Message.ToString())
         End Try
     End Sub
     Private Sub InitialiseInput()

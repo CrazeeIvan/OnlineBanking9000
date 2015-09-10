@@ -106,6 +106,7 @@ Partial Class transactionHandler
         Me.gbTransfer.Size = New System.Drawing.Size(368, 363)
         Me.gbTransfer.TabIndex = 24
         Me.gbTransfer.TabStop = False
+        Me.gbTransfer.Text = "Transfer"
         '
         'dtTransferDate
         '
@@ -177,6 +178,7 @@ Partial Class transactionHandler
         '
         'cboTransferTo
         '
+        Me.cboTransferTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTransferTo.FormattingEnabled = True
         Me.cboTransferTo.Location = New System.Drawing.Point(162, 71)
         Me.cboTransferTo.Name = "cboTransferTo"
@@ -185,6 +187,7 @@ Partial Class transactionHandler
         '
         'cboTransferFrom
         '
+        Me.cboTransferFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTransferFrom.FormattingEnabled = True
         Me.cboTransferFrom.Location = New System.Drawing.Point(162, 34)
         Me.cboTransferFrom.Name = "cboTransferFrom"
@@ -212,6 +215,7 @@ Partial Class transactionHandler
         Me.gbPayment.Size = New System.Drawing.Size(368, 363)
         Me.gbPayment.TabIndex = 25
         Me.gbPayment.TabStop = False
+        Me.gbPayment.Text = "Payment"
         '
         'txtPaymentAmount
         '
@@ -325,6 +329,7 @@ Partial Class transactionHandler
         '
         'cboPaymentFrom
         '
+        Me.cboPaymentFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboPaymentFrom.FormattingEnabled = True
         Me.cboPaymentFrom.Location = New System.Drawing.Point(162, 31)
         Me.cboPaymentFrom.Name = "cboPaymentFrom"
