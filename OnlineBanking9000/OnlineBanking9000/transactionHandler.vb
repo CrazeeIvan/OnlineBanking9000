@@ -63,7 +63,7 @@ Public Class transactionHandler
                 gbTransfer.Enabled = False
                 gbPayment.Enabled = False
             Catch ex As SqlException
-                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
+                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that the database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
             End Try
 
         ElseIf (radPayment.Checked = True) Then
@@ -95,7 +95,7 @@ Public Class transactionHandler
                 gbTransfer.Enabled = False
                 gbPayment.Enabled = False
             Catch ex As SqlException
-                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
+                MsgBox("Online Banker 9000 was unable to complete your Transaction." + vbNewLine + "Please ensure that the database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
             End Try
 
         Else
@@ -131,7 +131,6 @@ Public Class transactionHandler
         Else
             MsgBox("Cancel aborted by user!", ) 'If response is no then abort cancel and show a confirmation to the user
         End If
-
     End Sub
     Private Sub ConnectToDatabase()
         connectionString = "Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\blue20\Documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf;Integrated Security=True"
@@ -140,7 +139,7 @@ Public Class transactionHandler
             cnMySQLConnection.Open()
             MsgBox("Online Banker 9000 successfully connected to the Transaction database.")
         Catch ex As Exception
-            MsgBox("Online Banker 9000 was unable to connect to the Transaction database!" + vbNewLine + "Please ensure that database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
+            MsgBox("Online Banker 9000 was unable to connect to the Transaction database!" + vbNewLine + "Please ensure that the database is saved in: " + vbNewLine + "c:\users\blue20\documents\VSprojects\OnlineBanking9000\OnlineBanking9000\OnlineBanking9000\dbTransactions.mdf" + "Original Error: " + vbNewLine + ex.Message.ToString())
         End Try
     End Sub
     Private Sub InitialiseInput()

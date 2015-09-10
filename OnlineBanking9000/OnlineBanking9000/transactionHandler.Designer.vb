@@ -68,7 +68,7 @@ Partial Class transactionHandler
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 3
-        Me.btnSave.Text = "Save"
+        Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnCancel
@@ -77,7 +77,7 @@ Partial Class transactionHandler
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 4
-        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnExit
@@ -86,7 +86,7 @@ Partial Class transactionHandler
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(75, 23)
         Me.btnExit.TabIndex = 5
-        Me.btnExit.Text = "Exit"
+        Me.btnExit.Text = "&Exit"
         Me.btnExit.UseVisualStyleBackColor = True
         '
         'gbTransfer
@@ -350,7 +350,7 @@ Partial Class transactionHandler
         Me.radPayment.Size = New System.Drawing.Size(66, 17)
         Me.radPayment.TabIndex = 1
         Me.radPayment.TabStop = True
-        Me.radPayment.Text = "Payment"
+        Me.radPayment.Text = "&Payment"
         Me.radPayment.UseVisualStyleBackColor = True
         '
         'radTransfer
@@ -361,7 +361,7 @@ Partial Class transactionHandler
         Me.radTransfer.Size = New System.Drawing.Size(64, 17)
         Me.radTransfer.TabIndex = 0
         Me.radTransfer.TabStop = True
-        Me.radTransfer.Text = "Transfer"
+        Me.radTransfer.Text = "&Transfer"
         Me.radTransfer.UseVisualStyleBackColor = True
         '
         'chkDebug
@@ -371,7 +371,7 @@ Partial Class transactionHandler
         Me.chkDebug.Name = "chkDebug"
         Me.chkDebug.Size = New System.Drawing.Size(88, 17)
         Me.chkDebug.TabIndex = 2
-        Me.chkDebug.Text = "Debug Mode"
+        Me.chkDebug.Text = "&Debug Mode"
         Me.chkDebug.UseVisualStyleBackColor = True
         '
         'dgvDebug
